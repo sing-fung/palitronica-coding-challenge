@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.palitronica.payment.dao.OrderOverviewDAO">
+
+    <resultMap type="com.palitronica.payment.model.entity.OrderOverview" id="OrderOverviewMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="customer_id" column="customer_id" jdbcType="VARCHAR"/>
+        <result property="total_taxes" column="total_taxes" jdbcType="NUMERIC"/>
+        <result property="total_price" column="total_price" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <insert id="insert">
+        insert into `order_overview`
+        (`id`, `customer_id`, `total_taxes`, `total_price`)
+        values
+        (#{id}, #{customer_id}, #{total_taxes}, #{total_price})
+    </insert>
+
+</mapper>

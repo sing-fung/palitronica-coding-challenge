@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.palitronica.payment.dao.OrderItemDAO">
+
+    <resultMap type="com.palitronica.payment.model.entity.OrderItem" id="OrderItemMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="order_id" column="order_id" jdbcType="VARCHAR"/>
+        <result property="item_code" column="item_code" jdbcType="VARCHAR"/>
+        <result property="quantity" column="quantity" jdbcType="INTEGER"/>
+        <result property="item_total_price" column="item_total_price" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <insert id="insert">
+        insert into `order_item`
+        (`id`, `order_id`, `item_code`, `quantity`, `item_total_price`)
+        values
+        (#{id}, #{order_id}, #{item_code}, #{quantity}, #{item_total_price})
+    </insert>
+
+    <insert id="batchInsert" parameterType="list">
+        insert into `order_item`
+        (`id`, `order_id`, `item_code`, `quantity`, `item_total_price`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.order_id}, #{item.item_code}, #{item.quantity}, #{item.item_total_price})
+        </foreach>
+    </insert>
+
+</mapper>
