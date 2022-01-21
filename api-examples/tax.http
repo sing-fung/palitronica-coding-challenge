@@ -1,0 +1,60 @@
+### CASE 1
+GET http://localhost:8080/api/tax
+Content-Type: application/json
+
+{
+  "country": "US",
+  "city": "Watts",
+  "street": "123 Test St",
+  "zip": "90002"
+}
+
+
+### CASE 2
+GET http://localhost:8080/api/tax
+Content-Type: application/json
+
+{
+  "country": "CA",
+  "city": "Ottawa",
+  "street": "800 King Edward Ave",
+  "zip": "K1N6N5"
+}
+
+
+### CASE 3
+GET http://localhost:8080/api/tax
+Content-Type: application/json
+
+{
+  "country": "CA",
+  "city": "Vancouver",
+  "street": "510 W Georgia St #14",
+  "zip": "V6B0M3"
+}
+
+
+### CASE 4
+GET http://localhost:8080/api/tax
+Content-Type: application/json
+
+{
+  "country": "CA",
+  "city": "Edmonton",
+  "street": "116 St",
+  "zip": "T6G2R3"
+}
+
+
+### CASE 5
+GET http://localhost:8080/api/tax
+Content-Type: application/json
+
+{
+  "country": "CA",
+  "city": "Halifax",
+  "street": "6299 South St",
+  "zip": "B3H4R2"
+}
+
+###
