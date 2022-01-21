@@ -5,14 +5,15 @@ import com.palitronica.payment.dao.ItemDAO;
 import com.palitronica.payment.dao.OrderItemDAO;
 import com.palitronica.payment.dao.OrderOverviewDAO;
 import com.palitronica.payment.exception.BusinessException;
-import com.palitronica.payment.model.dto.ItemPriceDTO;
-import com.palitronica.payment.model.dto.ItemQuantityDTO;
-import com.palitronica.payment.model.dto.OrderRequestDTO;
-import com.palitronica.payment.model.dto.OrderResponseDTO;
+import com.palitronica.payment.model.dto.*;
 import com.palitronica.payment.model.entity.*;
 import com.palitronica.payment.model.entity.OrderItem;
 import com.palitronica.payment.model.entity.OrderOverview;
 import com.palitronica.payment.service.OrderService;
+import com.taxjar.Taxjar;
+import com.taxjar.exception.TaxjarException;
+import com.taxjar.model.rates.Rate;
+import com.taxjar.model.rates.RateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,8 +96,11 @@ public class OrderServiceImpl implements OrderService
             itemPriceDTOList.add(itemPriceDTO);
         }
 
-        order.setTotal_price(total_price);
-        order.setTotal_taxes(total_price);
+        Float combinedRate = getCombinedRate(customer);
+        double total_taxes = total_price * combinedRate;
+
+        order.setTotal_taxes(total_taxes);
+        order.setTotal_price(total_price + total_taxes);
 
         orderOverviewDAO.insert(order);
         orderItemDAO.batchInsert(orderItemList);
@@ -106,6 +110,26 @@ public class OrderServiceImpl implements OrderService
         result.setTotal_price(order.getTotal_price());
         result.setTotal_taxes(order.getTotal_taxes());
         result.setItemPrices(itemPriceDTOList);
+
+        return result;
+    }
+
+    public Float getCombinedRate(Customer customer)
+    {
+        Taxjar client = new Taxjar("16fb767b82fd197971e996d5b89b4a6b");
+        Float result = 0f;
+
+        try {
+            Map<String, String> params = new HashMap<>();
+            params.put("country", customer.getCountry());
+            params.put("city", customer.getCity());
+            params.put("street", customer.getStreet());
+            RateResponse res = client.ratesForLocation(customer.getZip(), params);
+            Rate rate = res.rate;
+            result = rate.getCombinedRate();
+        } catch (TaxjarException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }
