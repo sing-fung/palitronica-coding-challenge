@@ -62,6 +62,8 @@ public class OrderServiceImpl implements OrderService
         for(Item item : itemList)
         { itemPriceMap.put(item.getCode(), item.getPrice()); }
 
+        Set<String> itemCodeSet = itemPriceMap.keySet();
+
         // order's total price before taxes
         double total_price = 0;
 
@@ -70,10 +72,14 @@ public class OrderServiceImpl implements OrderService
         List<ItemPriceDTO> itemPriceDTOList = new ArrayList<>();
         for(ItemQuantityDTO itemQuantity : dto.getItemQuantityDTOs())
         {
+            String item_code = itemQuantity.getItem_code();
+
+            if(!itemCodeSet.contains(item_code))
+            { throw new BusinessException("item_code does not exist"); }
+
             OrderItem orderItem = new OrderItem();
             orderItem.setId(UUID.randomUUID().toString());
             orderItem.setOrder_id(order_id);
-            String item_code = itemQuantity.getItem_code();
             orderItem.setItem_code(item_code);
             int quantity = itemQuantity.getQuantity();
             orderItem.setQuantity(quantity);
