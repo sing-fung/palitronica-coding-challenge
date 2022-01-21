@@ -17,8 +17,8 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class ItemQuantityDTO
 {
-    @NotBlank(message = "item_id could not be empty")
-    private String item_id;
-    @Min(value = 1, message = "quantity should be larger than 0")
+    @NotBlank(message = "item_code could not be empty", groups = OrderRequestDTO.Insert.class)
+    private String item_code;
+    @Min(value = 1, message = "quantity should be larger than 0", groups = OrderRequestDTO.Insert.class)
     private int quantity;
 }

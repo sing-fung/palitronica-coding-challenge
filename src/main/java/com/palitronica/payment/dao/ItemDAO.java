@@ -18,4 +18,6 @@ public interface ItemDAO
     List<Item> queryAll();
 
     Item queryByCode(String code);
+
+    List<Item> queryByCodes(List<String> codes);
 }

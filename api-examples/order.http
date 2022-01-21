@@ -1,0 +1,24 @@
+### create an order
+POST http://localhost:8080/api/order
+Content-Type: application/json
+
+{
+  "customer_id": "d88dd09f-f870-4cf6-84f2-88c3a3d274fe",
+  "itemQuantityDTOs":
+  [
+    {
+      "item_code": "A0004",
+      "quantity": 2
+    },
+    {
+      "item_code": "A0005",
+      "quantity": 3
+    },
+    {
+      "item_code": "A0003",
+      "quantity": 1
+    }
+  ]
+}
+
+###

@@ -15,5 +15,5 @@ import lombok.*;
 public class ItemPriceDTO
 {
     private String item_code;
-    private String item_total_price;
+    private double item_total_price;
 }

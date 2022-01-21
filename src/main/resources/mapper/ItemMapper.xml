@@ -27,4 +27,11 @@
         select * from `item` where `code` = #{code}
     </select>
 
+    <select id="queryByCodes" resultMap="ItemMap">
+        select * from `item` where `code` in
+        <foreach collection="list" item="code" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </select>
+
 </mapper>
