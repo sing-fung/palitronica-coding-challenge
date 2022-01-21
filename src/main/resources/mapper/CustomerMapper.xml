@@ -8,6 +8,7 @@
         <result property="country" column="country" jdbcType="VARCHAR"/>
         <result property="city" column="city" jdbcType="VARCHAR"/>
         <result property="street" column="street" jdbcType="VARCHAR"/>
+        <result property="zip" column="zip" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryById" resultMap="CustomerMap">
@@ -16,9 +17,9 @@
 
     <insert id="insert">
         insert into `customer`
-        (`id`, `name`, `country`, `city`, `street`)
+        (`id`, `name`, `country`, `city`, `street`, `zip`)
         values
-        (#{id}, #{name}, #{country}, #{city}, #{street})
+        (#{id}, #{name}, #{country}, #{city}, #{street}, #{zip})
     </insert>
 
 </mapper>

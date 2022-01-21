@@ -25,6 +25,8 @@ public class CustomerDTO
     private String city;
     @NotBlank(message = "street could not be empty", groups = Insert.class)
     private String street;
+    @NotBlank(message = "zip could not be empty", groups = Insert.class)
+    private String zip;
 
     public interface Insert {}
 }

@@ -23,4 +23,5 @@ public class Customer implements Serializable
     private String country;
     private String city;
     private String street;
+    private String zip;
 }

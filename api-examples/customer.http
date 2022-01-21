@@ -3,10 +3,11 @@ POST http://localhost:8080/api/customer
 Content-Type: application/json
 
 {
-  "name": "Jim",
-  "country": "US",
-  "city": "Watts",
-  "street": "123 Test St"
+  "name": "Ethan",
+  "country": "CA",
+  "city": "Halifax",
+  "street": "6299 South St",
+  "zip": "B3H4R2"
 }
 
 ###
