@@ -27,7 +27,7 @@ import java.util.Map;
 public class TaxController
 {
     @GetMapping
-    public Float save(@RequestBody @Validated(AddressDTO.Insert.class) AddressDTO dto)
+    public Float getCombinedRate(@RequestBody @Validated(AddressDTO.Insert.class) AddressDTO dto)
     {
         Taxjar client = new Taxjar("16fb767b82fd197971e996d5b89b4a6b");
         Float result = 0f;
